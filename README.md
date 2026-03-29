@@ -1,6 +1,7 @@
 # Value Adding Christian Centre (VACC)
 
 Full-stack sample project:
+
 - Frontend: React (`frontend`)
 - Backend: Express (`backend`)
 
@@ -18,7 +19,9 @@ Full-stack sample project:
    - http://localhost:3000
 
 ## GitHub
+
 - Source is pushed to: `https://github.com/biggie1977/VACC`
 
 ## Notes
+
 - If you get `window.ethereum` warnings in browser, disable Metamask extension for this demo.

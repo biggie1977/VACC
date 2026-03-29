@@ -4,28 +4,15 @@
   padding: 0;
 }
 
-:root {
-  --gold: #C9A84C;
-  --gold-light: #F0D080;
-  --gold-dark: #8B6914;
-  --black: #0A0A0A;
-  --dark: #111111;
-  --dark2: #1A1A1A;
-  --dark3: #242424;
-  --white: #F5F0E8;
-  --text: #D4C9B0;
-  --accent: #E8C86A;
+body {
+  background: var(--background);
+  color: var(--text);
+  font-family: 'Lato', 'Segoe UI', 'Roboto', sans-serif;
+  overflow-x: hidden;
 }
 
 html {
   scroll-behavior: smooth;
-}
-
-body {
-  background: var(--black);
-  color: var(--text);
-  font-family: 'Lato', 'Segoe UI', 'Roboto', sans-serif;
-  overflow-x: hidden;
 }
 
 /* PARTICLES CANVAS */
@@ -51,9 +38,9 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(10, 10, 10, 0.85);
+  background: var(--nav-bg);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+  border-bottom: 1px solid var(--border);
   transition: all 0.3s;
 }
 

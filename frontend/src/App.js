@@ -4,6 +4,16 @@ import './App.css';
 function App() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [theme, setTheme] = useState(() => {
+    const stored = localStorage.getItem('theme');
+    if (stored === 'light' || stored === 'dark') return stored;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
   useEffect(() => {
     // Fetch data from backend API
@@ -29,6 +39,13 @@ function App() {
           <a href="#services">Services</a>
           <a href="#contact">Contact</a>
         </div>
+        <button
+          className="theme-toggle"
+          onClick={() => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))}
+          aria-label="Toggle theme"
+        >
+          {theme === 'dark' ? '☀️ Light' : '🌙 Dark'}
+        </button>
       </nav>
 
       <section className="hero" id="home">

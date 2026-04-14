@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Branches | Value Adding Christian Centre</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --gold: #C9A84C;
+            --gold-dark: #8B6914;
+            --gold-light: #F0D080;
+            --dark: #11151f;
+            --dark2: #151a2a;
+            --white: #ffffff;
+            --text: #f4f4f4;
+            --muted: rgba(244, 244, 244, 0.78);
+            scroll-behavior: smooth;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: #050505;
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at top left, rgba(201, 168, 76, 0.18), transparent 35%),
+                radial-gradient(circle at bottom right, rgba(255, 216, 106, 0.12), transparent 25%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1rem 4vw;
+            background: rgba(5, 5, 5, 0.92);
+            border-bottom: 1px solid rgba(201, 168, 76, 0.18);
+            backdrop-filter: blur(12px);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+            color: var(--gold-light);
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.6rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--gold);
+        }
+
+        .page-wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 4vw 6rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header .eyebrow {
+            display: block;
+            color: var(--gold);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-header h1 {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: clamp(2.2rem, 4vw, 4rem);
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .page-header p {
+            max-width: 720px;
+            margin: 0 auto;
+            color: var(--muted);
+            font-size: 1rem;
+        }
+
+        .branch-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.5rem;
+        }
+
+        .branch-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(201, 168, 76, 0.17);
+            border-radius: 24px;
+            padding: 0;
+            transition: transform 0.25s ease, border-color 0.25s ease;
+            overflow: hidden;
+        }
+
+        .branch-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(201, 168, 76, 0.35);
+        }
+
+        .branch-card summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 2rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            min-height: 100px;
+        }
+
+        .branch-card summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .branch-card summary::after {
+            content: '+';
+            margin-left: auto;
+            font-size: 1.4rem;
+            color: var(--gold);
+            line-height: 1;
+        }
+
+        .branch-card[open] summary::after {
+            content: '−';
+        }
+
+        .branch-card-head {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .branch-icon {
+            font-size: 2.2rem;
+            width: 56px;
+            height: 56px;
+            border-radius: 18px;
+            display: grid;
+            place-items: center;
+            background: rgba(201, 168, 76, 0.18);
+        }
+
+        .branch-card h2 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: var(--white);
+        }
+
+        .branch-card p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.96rem;
+            line-height: 1.75;
+        }
+
+        .branch-details {
+            display: grid;
+            gap: 0.75rem;
+            color: var(--text);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .branch-details span {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .branch-details strong {
+            color: var(--gold);
+            min-width: 120px;
+            display: inline-block;
+        }
+
+        .branch-program-group {
+            margin-top: 1rem;
+        }
+
+        .branch-program-group strong {
+            display: block;
+            margin-bottom: 0.75rem;
+            color: var(--gold);
+        }
+
+        .program-list {
+            list-style: none;
+            margin: 0;
+            padding: 0 0 0 1rem;
+            color: var(--muted);
+        }
+
+        .program-list li {
+            margin-bottom: 0.55rem;
+        }
+
+        .program-day {
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .back-home {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.9rem 1.8rem;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 999px;
+            font-weight: 700;
+            transition: opacity 0.2s ease;
+        }
+
+        .back-home:hover {
+            opacity: 0.92;
+        }
+
+        @media (max-width: 960px) {
+            .branch-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .branch-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="index.html" class="nav-logo">VACC</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#leadership">Leadership</a></li>
+            <li><a class="active" href="branches.html">Branches</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main class="page-wrap">
+        <section class="page-header">
+            <span class="eyebrow">Our Branches</span>
+            <h1>Find a Branch Near You</h1>
+            <p>Explore the dedicated locations of Value Adding Christian Centre and discover the nearest church
+                community for worship, connection, and growth.</p>
+        </section>
+
+        <section class="branch-grid">
+            <details class="branch-card" open>
+                <summary>
+                    <div class="branch-card-head">
+                        <div class="branch-icon">⛪</div>
+                        <div>
+                            <h2>EPE CENTRE</h2>
+                            <p>Value Adding Christian Centre</p>
+                            <p>Back of AP Filling Station (or JOY RICH HOTEL), Poka-Epe</p>
+                        </div>
+                    </div>
+                </summary>
+                <div class="branch-details">
+                    <span><strong>Contact:</strong> 08055514225 · 07062154291 · 0816 560 5271</span>
+                    <div class="branch-program-group">
+                        <strong>Weekly Services</strong>
+                        <ul class="program-list">
+                            <li><span class="program-day">Sunday</span> — Sunday Service • 9:00am – 11:00am</li>
+                            <li><span class="program-day">Monday</span> — Hour of Mercy • 5:00pm – 6:30pm</li>
+                            <li><span class="program-day">Wednesday</span> — Bible Study</li>
+                        </ul>
+                    </div>
+                </div>
+            </details>
+
+            <details class="branch-card">
+                <summary>
+                    <div class="branch-card-head">
+                        <div class="branch-icon">🕊️</div>
+                        <div>
+                            <h2>ABULE OJA BRANCH</h2>
+                            <p>VACC Yaba</p>
+                            <p>47, Lawani Street, Abule-Oja, Yaba, Lagos</p>
+                        </div>
+                    </div>
+                </summary>
+                <div class="branch-details">
+                    <span><strong>Contact:</strong> 08132837955</span>
+                    <div class="branch-program-group">
+                        <strong>Regular Services</strong>
+                        <ul class="program-list">
+                            <li><span class="program-day">Sunday</span> — Workers Meeting • 8:00am</li>
+                            <li><span class="program-day">Sunday</span> — Sunday Service • 9:00am</li>
+                            <li><span class="program-day">Tuesday</span> — Midweek Service • 6:00pm</li>
+                        </ul>
+                    </div>
+                    <div class="branch-program-group">
+                        <strong>Special Services</strong>
+                        <ul class="program-list">
+                            <li>Annual Convention — Last Sunday in October</li>
+                            <li>Children's Day — 4th Sunday in May</li>
+                            <li>Women Conference — 3rd Sunday in August</li>
+                            <li>Shiloh Praise — 1st Tuesday in July</li>
+                            <li>Carol Service — 3rd Tuesday in December</li>
+                            <li>Crossover Service — December 31st</li>
+                        </ul>
+                    </div>
+                </div>
+            </details>
+
+            <details class="branch-card">
+                <summary>
+                    <div class="branch-card-head">
+                        <div class="branch-icon">✝️</div>
+                        <div>
+                            <h2>APATA BRANCH</h2>
+                            <p>VACC Shomolu Palm Groove</p>
+                            <p>134 Apata Street, Shomolu Palm Groove, Lagos</p>
+                        </div>
+                    </div>
+                </summary>
+                <div class="branch-details">
+                    <span><strong>Contact:</strong> N/A</span>
+                    <div class="branch-program-group">
+                        <strong>Weekly Services</strong>
+                        <ul class="program-list">
+                            <li><span class="program-day">Sunday</span> — 1st Service • 8:00am – 9:30am</li>
+                            <li><span class="program-day">Sunday</span> — 2nd Service • 9:30am – 11:30am</li>
+                            <li><span class="program-day">Wednesday</span> — Discovery Hour • 5:55pm – 8:00pm</li>
+                            <li><span class="program-day">Thursday</span> — Prophetic Hour of Mercy • 7:00am – 9:00am
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="branch-program-group">
+                        <strong>Monthly Programs</strong>
+                        <ul class="program-list">
+                            <li>Divine Encounter — Last week of every month</li>
+                            <li>Prophetic, Healing & Miracles Combined Service — Last Sunday, 8:00am</li>
+                        </ul>
+                    </div>
+                    <div class="branch-program-group">
+                        <strong>Annual Programs</strong>
+                        <ul class="program-list">
+                            <li>Annual Convention / Anniversary — Last week of March</li>
+                            <li>Youth Convention — 3rd week of May</li>
+                            <li>Women Convention — 1st Sunday of October</li>
+                            <li>Holy Ghost Anointing Night — Last week of October</li>
+                            <li>Annual Family Thanksgiving Service — 2nd Sunday of December</li>
+                        </ul>
+                    </div>
+                </div>
+            </details>
+        </section>
+
+        <a class="back-home" href="index.html">Back to Home</a>
+    </main>
+    <script>
+        document.querySelectorAll('.branch-card').forEach(card => {
+            card.addEventListener('toggle', () => {
+                if (!card.open) return;
+                document.querySelectorAll('.branch-card').forEach(other => {
+                    if (other !== card) other.open = false;
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

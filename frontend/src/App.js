@@ -16,17 +16,10 @@ function App() {
   }, [theme]);
 
   useEffect(() => {
-    // Fetch data from backend API
     fetch('http://localhost:5000/api/health')
-      .then(response => response.json())
-      .then(data => {
-        setData(data);
-        setLoading(false);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-        setLoading(false);
-      });
+      .then(r => r.json())
+      .then(d => { setData(d); setLoading(false); })
+      .catch(() => setLoading(false));
   }, []);
 
   return (
@@ -36,12 +29,13 @@ function App() {
         <div className="nav-links">
           <a href="#home">Home</a>
           <a href="#about">About</a>
+          <a href="/branches.html">Branches</a>
           <a href="#services">Services</a>
           <a href="#contact">Contact</a>
         </div>
         <button
           className="theme-toggle"
-          onClick={() => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))}
+          onClick={() => setTheme(prev => prev === 'dark' ? 'light' : 'dark')}
           aria-label="Toggle theme"
         >
           {theme === 'dark' ? '☀️ Light' : '🌙 Dark'}
@@ -52,8 +46,8 @@ function App() {
         <div className="hero-content">
           <h1>Value Adding Christian Centre</h1>
           <p>Welcome to our community of faith and growth</p>
-          <button onClick={() => alert('Welcome to VACC!')}>
-            Get Started
+          <button onClick={() => window.location.href = '/branches.html'}>
+            Find a Branch
           </button>
         </div>
       </section>
